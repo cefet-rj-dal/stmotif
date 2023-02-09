@@ -1,2 +1,2 @@
-# STMotifDev
-STMotifDev
+# STMotif
+STMotif
