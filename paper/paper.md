@@ -23,8 +23,6 @@ date: 17 March 2026
 
 **STMotif** is an R package for discovering, ranking, and visualizing motifs in **spatial-time series**. Unlike traditional motif discovery tools that analyze each time series independently, STMotif targets patterns that are constrained simultaneously in space and time and may emerge only when neighboring series are analyzed jointly. The package implements the **Combined Series Approach (CSA)** introduced by @borges_spatial-time_2020 and provides end-to-end support for normalization, SAX encoding, motif search, ranking, and visual inspection of the resulting motifs.
 
-Hello world!
-
 # Statement of need
 
 Many real-world phenomena can be represented as time series, and some of them are naturally associated with spatial location, producing spatial-time series datasets [@shumway_time_2017; @atkinson_gis_2000]. Examples include sensor networks, environmental monitoring, ocean currents, seismic data, and other geo-referenced temporal observations [@fu_review_2011]. In these scenarios, relevant patterns may not be strongly expressed in a single series, but rather distributed across multiple neighboring series.
