@@ -1,0 +1,87 @@
+Instruções para fazer o paper compilar no fluxo do JOSS
+
+1. O que precisa existir no repositório
+
+Na raiz do repositório, mantenha a pasta `paper` com estes arquivos:
+
+- `paper/paper.md`
+- `paper/paper.bib`
+- `paper/figures/STMotif_package.png`
+- `paper/.github/workflows/draft-pdf.yml`
+
+Observação:
+- O workflow já está configurado para compilar `paper/paper.md`.
+
+2. O que fazer antes do commit
+
+Verifique se:
+
+- o YAML no topo de `paper.md` está válido;
+- a data está em formato como `17 March 2026`;
+- todos os arquivos citados no texto existem;
+- as referências citadas em `paper.md` existem em `paper.bib`.
+
+3. Como gerar o PDF no GitHub
+
+Depois de subir a pasta `paper` para o repositório:
+
+1. Faça `git add .`
+2. Faça `git commit -m "Atualiza paper JOSS"`
+3. Faça `git push`
+4. No GitHub, abra a aba `Actions`
+5. Abra o workflow `Draft PDF`
+6. Espere a execução terminar
+7. Baixe o artefato `paper`
+8. Dentro do artefato estará o arquivo `paper.pdf`
+
+4. O que o workflow faz
+
+O arquivo `.github/workflows/draft-pdf.yml` usa a action oficial do Open Journals:
+
+- `openjournals/openjournals-draft-action`
+
+Ela gera automaticamente o PDF do artigo no formato JOSS.
+
+5. Se o workflow falhar
+
+Verifique primeiro:
+
+- se o caminho em `paper-path` está correto:
+  `paper/paper.md`
+- se o arquivo `paper.bib` está no mesmo diretório do `paper.md`;
+- se a imagem `figures/STMotif_package.png` existe;
+- se não há erro de YAML no cabeçalho do `paper.md`;
+- se não há citações faltando no `paper.bib`.
+
+6. Se quiser salvar o PDF no próprio repositório
+
+Não é obrigatório.
+
+Se quiser que a action faça commit automático do `paper.pdf`, você terá que:
+
+1. Ir em `Settings` > `Actions` > `General`
+2. Habilitar `Workflow permissions: Read and write`
+3. Adicionar ao workflow um passo extra de commit
+
+Hoje o workflow está configurado apenas para gerar o PDF como artefato, que é a forma mais simples e segura.
+
+7. Estrutura exigida pelo JOSS
+
+O `paper.md` deve manter estas seções:
+
+- `Summary`
+- `Statement of need`
+- `State of the field`
+- `Software design`
+- `Research impact statement`
+- `AI usage disclosure`
+- `Acknowledgements`
+- `References`
+
+8. Referências úteis
+
+- JOSS paper format:
+  https://joss.readthedocs.io/en/latest/paper.html
+
+- Open Journals GitHub Action:
+  https://github.com/marketplace/actions/open-journals-pdf-generator
