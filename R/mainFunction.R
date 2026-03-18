@@ -1,3 +1,6 @@
+# Main functions to adjust datasets and run the full STMotif mining process.
+# The package uses spatial-temporal blocks and SAX encoding to identify frequent motifs.
+
 #' Adjust a Dataset
 #' Adjust the dimensions of a dataset to build the blocks
 #' @param D Dataset containing numeric values
@@ -9,6 +12,7 @@
 #' D <- STSADatasetAdjust(STMotif::example_dataset, 20, 12)
 #' @export
 STSADatasetAdjust  <- function(D, tb, sb) {
+  # Keep only full blocks by rounding down dimensions to tb and sb multiples
   c = ncol(D)
   r = nrow(D)
   ec = c %% sb
@@ -41,8 +45,11 @@ STSADatasetAdjust  <- function(D, tb, sb) {
 #' rmotif <- CSAMiningProcess(D,DS,4,5,4,10,2,2)
 #' @export
 CSAMiningProcess <- function (D,DS,w,a,sb,tb,si,ka){
+  # Normalize and encode dataset with SAX alphabet size a
   DS <- NormSAX(D,a)
+  # Search for spatial-temporal motifs in the dataset blocks
   stmotifs <- SearchSTMotifs(D,DS,w,a,sb,tb,si,ka)
+  # Rank discovered motifs using distance/word/occurrence metrics
   rstmotifs <- RankSTMotifs(stmotifs)
   return(rstmotifs)
 }
@@ -89,7 +96,8 @@ NormSAX <- function (D,a){
 #' stmotifs <- SearchSTMotifs(D,DS,4,5,4,10,2,2)
 #' @export
 SearchSTMotifs <- function (D,DS,w,a,sb,tb,si=3,ka=3){
-
+  # Compute spatial-temporal blocks for SAX and original data
+  # Then identify motifs in each block and merge into global ST motifs.
   saxblocks <- STSComputeBlocks(DS, tb, sb)
   saxblocks$rectangles <- NULL
 
@@ -106,6 +114,7 @@ SearchSTMotifs <- function (D,DS,w,a,sb,tb,si=3,ka=3){
     saxblock = saxblocks$datasets[[i]]
     block = as.vector(as.matrix(block))
     saxblock = as.vector(as.matrix(saxblock))
+    # Identify repeated SAX subsequences within each block
     motifs[[i]] <- identifyMotifsInBlock(ts = block, tss = saxblock, tb = tb ,w = w, a = a)
   }
 

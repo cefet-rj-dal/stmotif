@@ -17,7 +17,7 @@ display_motifsSTSeries(dataset, rmotifs, space = c(1:length(dataset)))
 Selected spatial series with the selected motifs highlighted
 }
 \description{
-Plot the selected spatial-time series with the selected motifs highlighted
+Visualization helpers for motifs in the spatial-temporal matrix.
 }
 \examples{
 #Launch all the workflow

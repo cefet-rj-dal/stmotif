@@ -22,6 +22,29 @@ knitr::opts_chunk$set(
 
 The goal of the `STSMotif` R package is to allows the discovery and ranking of a motif in spatial-time series quickly and efficiently.
 
+### Quick Start
+
+```r
+# Install devtools if needed
+install.packages("devtools")
+
+# Install package from local source (for development)
+devtools::install(".")
+
+# Load package
+library(STMotif)
+
+# Run a quick motif discovery workflow
+D <- STMotif::example_dataset
+DS <- NormSAX(D, a = 5)
+stmotifs <- SearchSTMotifs(D, DS, w=4, a=5, sb=4, tb=10, si=2, ka=2)
+rstmotifs <- RankSTMotifs(stmotifs)
+
+# Visualize
+display_motifsDataset(D, rstmotifs[1:4], alpha = 5)
+display_motifsSTSeries(D, rstmotifs[1:4], space = c(1:4,10:12))
+```
+
 
 ```{r, echo=FALSE}
 source(file = "../R/mainFunction.R")

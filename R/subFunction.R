@@ -1,3 +1,6 @@
+# Utility functions for STMotif: normalization, SAX encoding, block generation,
+# motif identification, motif merging, ranking, and visualization helpers.
+
 # binning the dataset
 # Build an encode for the values
 binning <- function(v, a) {
@@ -88,6 +91,7 @@ identifyMotifsInBlock <- function(ts, tss, w, tb , a) {
     indices[[saxMotif]] <- c(indices[[saxMotif]],ts.sax[i,1])
   }
   while (j <= length(indices)){ #removing the motif with just 1 or less occurences
+    # Keep only motifs that appear at least twice inside this block
     if(length(indices[[j]])<=1){indices[[j]]<-NULL}else{j<-j+1}
   }
 
@@ -128,9 +132,9 @@ STSIdentifySTMotif <- function(stmotifs, motif, nrows, ncols, rectangle, ka, si)
       vec <- motif$Indices[[a]]
 
       #BO - Block Occurrences validation
-      #check if the number of occurrences into the block is greater or equal to sigma
+      # check if number of subsequence occurrences in this block meets sigma threshold
       if(length(vec) >= si) {
-        #scount: vector of 0, with sb columns
+        # scount: track which spatial columns in block contain this motif
         scount <- rep(0, sb)
 
         #for each occurence of the motif
@@ -177,10 +181,10 @@ STSIdentifyTightSTMotif <- function(stmotif, rectangles) {
   tight <- list()
   mat <- stmotif$recmatrix #Get the recmatrix of one motif
   vecst <- stmotif$vecst #Get start position of the motif
-  #For each block
+  # For each block in the recmatrix, merge adjacent non-zero region labels to find connected motif regions
   for (i in 1:nrow(mat)) {
     for (j in 1:(ncol(mat)-1)) {
-      #Checking blocks neighbor if there is a presence of this motif
+      # Check neighbors to merge connected motif blocks
       if (mat[i,j] != 0) {
         iP <- i + 1
         jP <- j + 1
@@ -229,6 +233,13 @@ STSIdentifyTightSTMotif <- function(stmotif, rectangles) {
 
 
 # Function to plot spatial series
+#' Plot series lines with facet grid for spatial-time series
+#'
+#' @param series Melted data frame with x, value, color, and variable columns.
+#' @param label_series Optional label for series.
+#' @param label_x Optional x-axis label.
+#' @param label_y Optional y-axis label.
+#' @export
 plot.series <- function(series, label_series = "", label_x = "", label_y = "") {
   grf <- ggplot(data=series, ggplot2::aes(x = series$x, y = series$value, colour = series$color, group = 1))
   grf <- grf + scale_colour_identity(series$color) + geom_line() + geom_point(data=series, aes(x = series$x, y = series$value), size=0.5) + facet_grid(variable ~ .)

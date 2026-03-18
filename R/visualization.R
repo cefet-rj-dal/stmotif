@@ -1,5 +1,7 @@
 #' Plot the selected spatial-time series with the selected motifs highlighted
 #'
+#' Visualization helpers for motifs in the spatial-temporal matrix.
+#'
 #' @param dataset Dataset containing numeric values
 #' @param rmotifs List of ranked motifs
 #' @param space Select a range of columns to plot the corresponding spatial series

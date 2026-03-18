@@ -1,0 +1,48 @@
+---
+title: "STMotif Package"
+author: "STMotif"
+output: html_document
+---
+
+# STMotif
+
+STMotif is an R package for spatial-temporal motif mining on matrix datasets. It uses SAX encoding and block-based motif search.
+
+## Project Structure
+
+- `R/`: Package source implementation (algorithm, utilities, visualization).
+- `data/`: Example dataset for demos (`example_dataset.RData`).
+- `man/`: R documentation pages for exported functions.
+- `inst/doc/`: Compiled vignette help pages (e.g. `STMotif.html`).
+- `vignettes/`: Source vignette file `STMotif.Rmd`.
+
+## Main Workflow
+
+1. Use `STSADatasetAdjust()` to trim the dataset to block-compatible dimensions.
+2. Use `NormSAX()` to normalize and SAX-encode the dataset.
+3. Use `SearchSTMotifs()` to find candidate motifs within spatial-temporal blocks.
+4. Use `RankSTMotifs()` to rank motifs by distance/word/occurrence quality.
+5. Visualize with `display_motifsDataset()` and `display_motifsSTSeries()`.
+
+## Primary Files
+
+- `R/mainFunction.R`: High-level functions and workflow APIs.
+- `R/subFunction.R`: Core motif discovery algorithms and utilities.
+- `R/visualization.R`: Plotting functions for motifs and heatmaps.
+
+## Documentation
+
+- A package vignette is available in `vignettes/STMotif.Rmd`.
+- Generated documentation pages are in `inst/doc/`.
+- To build package help: use `devtools::document()`.
+
+## Example
+
+```r
+library(STMotif)
+D <- STMotif::example_dataset
+DS <- NormSAX(D, 5)
+stmotifs <- SearchSTMotifs(D, DS, 4, 5, 4, 10, 2, 2)
+rstmotifs <- RankSTMotifs(stmotifs)
+display_motifsDataset(D, rstmotifs[1:4], alpha=5)
+```
