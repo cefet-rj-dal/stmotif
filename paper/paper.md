@@ -39,7 +39,7 @@ The CSA method proposed by @borges_spatial-time_2020 extends this perspective by
 
 # Software design
 
-STMotif is organized as a pipeline that separates symbolic preprocessing, constrained motif search, ranking, and visualization, as illustrated in Figure \autoref{fig:pipeline}. This separation matters because users may need to inspect encoded data, tune discovery thresholds, or reuse intermediate results while exploring spatial-time datasets.
+STMotif is organized as a pipeline that separates symbolic preprocessing, constrained motif search, ranking, and visualization, as illustrated in \autoref{fig:pipeline}. This separation matters because users may need to inspect encoded data, tune discovery thresholds, or reuse intermediate results while exploring spatial-time datasets.
 
 The motif discovery process begins with a spatial-time dataset in which each time series is associated with a spatial position. Since direct motif discovery over real-valued subsequences is inefficient, the package first applies **z-score normalization** followed by **SAX indexing** [@keogh_exact_2005; @lin_experiencing_2007]. SAX transforms numeric subsequences into symbolic words drawn from an alphabet of size $a$, producing a representation more suitable for frequent-pattern discovery.
 
