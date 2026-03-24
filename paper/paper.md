@@ -39,7 +39,7 @@ The CSA method proposed by @borges_spatial-time_2020 extends this perspective by
 
 # Software design
 
-STMotif is organized as a pipeline that separates symbolic preprocessing, constrained motif search, ranking, and visualization. This separation matters because users may need to inspect encoded data, tune discovery thresholds, or reuse intermediate results while exploring spatial-time datasets.
+STMotif is organized as a pipeline that separates symbolic preprocessing, constrained motif search, ranking, and visualization, as illustrated in Figure \autoref{fig:pipeline}. This separation matters because users may need to inspect encoded data, tune discovery thresholds, or reuse intermediate results while exploring spatial-time datasets.
 
 The motif discovery process begins with a spatial-time dataset in which each time series is associated with a spatial position. Since direct motif discovery over real-valued subsequences is inefficient, the package first applies **z-score normalization** followed by **SAX indexing** [@keogh_exact_2005; @lin_experiencing_2007]. SAX transforms numeric subsequences into symbolic words drawn from an alphabet of size $a$, producing a representation more suitable for frequent-pattern discovery.
 
@@ -47,7 +47,7 @@ The indexed dataset is then partitioned into blocks according to two user-define
 
 After discovery, STMotif ranks motifs according to three complementary criteria: number of occurrences, spatial-temporal proximity of occurrences, and entropy. The ranking phase favors motifs that are frequent, spatially and temporally coherent, and information-rich. This design choice is important because motif mining can return many candidates, and the ranking stage helps users focus on the most informative patterns without losing access to the complete result set.
 
-![Figure 1: Main functionalities of STMotif, including normalization and SAX indexing, motif search, ranking, and visualization.](figures/STMotif_package.png)
+![Figure 1: Main functionalities of STMotif, including normalization and SAX indexing, motif search, ranking, and visualization.\label{fig:pipeline}](figures/STMotif_package.png)
 
 The package exposes this workflow through a compact set of user-facing functions:
 
