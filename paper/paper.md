@@ -50,7 +50,7 @@ STMotif is organized as a pipeline that separates symbolic preprocessing, constr
 
 **Visualization.** Two plotting functions help users connect symbolic motifs back to the original data: one highlights motif occurrences on individual series, the other displays a heat map of the full dataset with motif positions color-coded.
 
-![Figure 1: Main functionalities of STMotif, including normalization and SAX indexing, motif search, ranking, and visualization.\label{fig:pipeline}](figures/STMotif_packagev2.png){width=70%}
+![Figure 1: Main functionalities of STMotif, including normalization and SAX indexing, motif search, ranking, and visualization.\label{fig:pipeline}](figures/STMotif_packagev2.png)
 
 The package exposes this workflow through a compact set of user-facing functions:
 
@@ -105,7 +105,7 @@ Visualization reveals that some motifs span a broad spatial range at a fixed tim
 display_motifsSTSeries(D, rstmotifs, space = c(1:9))
 ```
 
-![Spatial-time series ST1 through ST9 with ranked motif groups highlighted. Each color corresponds to a different motif group. Because the mining operates on SAX-encoded data, motif instances sharing the same symbolic word may differ in their real-valued shape.\label{fig:stseries}](figures/display_motifsSTSeries.png){width=70%}
+![Spatial-time series ST1 through ST9 with ranked motif groups highlighted. Each color corresponds to a different motif group. Because the mining operates on SAX-encoded data, motif instances sharing the same symbolic word may differ in their real-valued shape.\label{fig:stseries}](figures/display_motifsSTSeries.png)
 
 The second function, `display_motifsDataset()`, produces a heat map of the SAX-encoded dataset with motif occurrences color-coded over their spatial and temporal positions (\autoref{fig:dataset}):
 
@@ -113,7 +113,7 @@ The second function, `display_motifsDataset()`, produces a heat map of the SAX-e
 display_motifsDataset(D, rstmotifs, a = 5)
 ```
 
-![Heat map of the full spatial-time series dataset. Grayscale intensity represents the SAX-encoded values; colored regions mark the spatial-temporal positions of each motif group. Motifs in red ("ceeb") span a broad spatial range at a fixed time, while motifs in blue ("baba") are spatially restricted. These spatially distributed patterns would not be detected by traditional methods that analyze each series independently.\label{fig:dataset}](figures/display_motifsDataset.png){width=70%}
+![Heat map of the full spatial-time series dataset. Grayscale intensity represents the SAX-encoded values; colored regions mark the spatial-temporal positions of each motif group. Motifs in red ("ceeb") span a broad spatial range at a fixed time, while motifs in blue ("baba") are spatially restricted. These spatially distributed patterns would not be detected by traditional methods that analyze each series independently.\label{fig:dataset}](figures/display_motifsDataset.png)
 
 # Availability and community guidelines
 
